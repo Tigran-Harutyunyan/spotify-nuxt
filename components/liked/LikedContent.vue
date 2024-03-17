@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { type Song } from "@/types";
+import LikeButton from "@/components/LikeButton.vue";
 
 interface SearchContentProps {
   songs: Song[];
