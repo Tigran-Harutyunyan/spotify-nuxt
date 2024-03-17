@@ -8,14 +8,12 @@ import RxCaretRight from "@/components/ui/icons/RxCaretRight.vue";
 import FaUserAlt from "@/components/ui/icons/FaUserAlt.vue";
 
 import { useModalsStore } from "@/stores/modals";
-import { useToast } from "@/components/ui/toast/use-toast";
+import { toast } from "vue-sonner";
 
 interface HeaderProps {
   className?: string;
 }
 const { className } = defineProps<HeaderProps>();
-
-const { toast } = useToast();
 
 const { onOpen } = useModalsStore();
 
@@ -33,11 +31,7 @@ const handleLogout = async () => {
   player.reset();
 
   if (error) {
-    toast({
-      variant: "destructive",
-      description: error?.message,
-      duration: 3000,
-    });
+    toast.error(error?.message);
   }
 };
 </script>
