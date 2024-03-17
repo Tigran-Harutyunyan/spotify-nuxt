@@ -34,7 +34,7 @@ const routes = computed(() => [
 </script>
 
 <template>
-  <div :class="cn('flex h-full', activeId && 'h-[calc(100%-80px)]')">
+  <div :class="cn('flex h-full', activeId && 'h-[calc(100% - 80px)]')">
     <div class="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2">
       <Box>
         <div class="flex flex-col gap-y-4 px-5 py-4">
