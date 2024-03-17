@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { UserContextProvider } from "@nuxtbase/auth-ui-vue";
+import { Toaster } from "@/components/ui/sonner";
+
 const supabaseClient = useSupabaseClient();
 </script>
 <template>
@@ -8,7 +10,7 @@ const supabaseClient = useSupabaseClient();
       <NuxtPage />
       <ClientOnly>
         <ModalsContainer />
-        <Toaster />
+        <Toaster position="top-center" />
       </ClientOnly>
     </NuxtLayout>
   </UserContextProvider>
