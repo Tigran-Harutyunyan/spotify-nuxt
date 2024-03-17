@@ -3,18 +3,16 @@ import { serverSupabaseClient } from "#supabase/server";
 export default defineEventHandler(async (event) => {
     const client = await serverSupabaseClient(event);
 
-    const { data: sessionData, error: sessionError } = await client.auth.getSession();
+    const params = await event.context.params;
 
-    if (sessionError) {
-        console.log(sessionError.message);
+    if (!params) {
         return [];
     }
-
 
     const { data, error } = await client
         .from('songs')
         .select('*')
-        .eq('user_id', sessionData?.session?.user.id as string)
+        .eq('user_id', params?.userId as string)
         .order('created_at', { ascending: false })
 
     if (error) {
