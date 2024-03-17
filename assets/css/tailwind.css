@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+html,
+body,
+:root {
+  height: 100%;
+  background-color: black;
+  color-scheme: dark;
+  font-family: Figtree;
+}
+
+body, html {
+  height: 100%;
+}
+
+body > div:first-of-type {
+  height: 100%;
+}
+
+#__nuxt >div {
+  height: 100vh;
+}
