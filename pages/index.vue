@@ -4,9 +4,12 @@ import { useMainStore } from "@/stores/main";
 
 const { addSongCount } = storeToRefs(useMainStore());
 
-const { data: songs, refresh } = await useAsyncData<Song[]>("serverData", () =>
-  $fetch(`/api/songs`)
-);
+const {
+  data: songs,
+  refresh,
+  error,
+  pending,
+} = await useAsyncData<Song[]>("serverData", () => $fetch(`/api/songs`));
 
 watch(
   () => addSongCount.value,
@@ -17,7 +20,11 @@ watch(
 </script>
 
 <template>
+  <Box class="h-full flex items-center justify-center" v-if="error">
+    <div class="text-neutral-400">Something went wrong.</div>
+  </Box>
   <div
+    v-if="!error"
     class="bg-neutral-900 md:rounded-lg h-full w-full overflow-hidden overflow-y-auto"
   >
     <Header>
