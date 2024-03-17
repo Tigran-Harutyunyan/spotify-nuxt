@@ -17,20 +17,14 @@ useSeoMeta({
   description: "Listen to music",
 });
 
-const songs = ref<Song[]>([]);
-
 const { addSongCount } = storeToRefs(useMainStore());
 
 const { user } = useUser();
 
-const { data: serverData, refresh } = await useAsyncData<Song[]>(
-  "serverData",
+const { data: songs, refresh } = await useAsyncData<Song[]>(
+  "sidebar-songs",
   () => $fetch(`/api/songs/user/${user?.value?.id}`)
 );
-
-if (serverData.value && Array.isArray(serverData.value)) {
-  songs.value = serverData.value;
-}
 
 watch(
   () => addSongCount.value,
