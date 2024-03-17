@@ -9,7 +9,7 @@ const {
   refresh,
   error,
   pending,
-} = await useAsyncData<Song[]>("serverData", () => $fetch(`/api/songs`));
+} = await useAsyncData<Song[]>("indexSongs", () => $fetch(`/api/songs`));
 
 watch(
   () => addSongCount.value,

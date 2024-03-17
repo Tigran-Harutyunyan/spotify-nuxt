@@ -12,9 +12,10 @@ const songs = computed(() => {
     data?.[0]?.songs &&
     typeof data[0]?.songs === "object"
   ) {
+    if (Array.isArray(data)) return data.map((item) => item.songs);
     return [data[0]?.songs];
   }
-
+  debugger;
   return data[0]?.songs;
 });
 </script>

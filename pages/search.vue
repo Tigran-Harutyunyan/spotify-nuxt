@@ -11,7 +11,7 @@ const {
   data: songs,
   refresh,
   error,
-} = await useAsyncData<Song[]>("serverData", () =>
+} = await useAsyncData<Song[]>("search", () =>
   $fetch(`/api/songs/title?title=${params.query?.title || ""}`)
 );
 
