@@ -7,7 +7,11 @@ definePageMeta({
 
 const params = useRoute();
 
-const { data: songs, refresh } = await useAsyncData<Song[]>("serverData", () =>
+const {
+  data: songs,
+  refresh,
+  error,
+} = await useAsyncData<Song[]>("serverData", () =>
   $fetch(`/api/songs/title?title=${params.query?.title || ""}`)
 );
 
@@ -20,6 +24,9 @@ watch(
 </script>
 
 <template>
+  <Box class="h-full flex items-center justify-center" v-if="error">
+    <div class="text-neutral-400">Something went wrong.</div>
+  </Box>
   <div
     class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto"
   >
