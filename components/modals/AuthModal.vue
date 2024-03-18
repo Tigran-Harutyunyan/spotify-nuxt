@@ -32,7 +32,6 @@ watch(
     :show="isModalOpen"
     @close="onClose()"
   >
-    {{ runtimeConfig.public.appUrl }}
     <Auth
       :supabaseClient="supabaseClient"
       :providers="['google']"
