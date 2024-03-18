@@ -38,5 +38,10 @@ export default defineNuxtConfig({
   },
   image: {
     domains: []
-  }
+  },
+  runtimeConfig: {
+    public: {
+      appUrl: process.env.NUXT_PUBLIC_APP_URL,
+    }
+  },
 })

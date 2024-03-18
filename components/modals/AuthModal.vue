@@ -13,6 +13,8 @@ const isModalOpen = isOpen.value && type.value === "auth";
 
 const { user } = useUser();
 
+const runtimeConfig = useRuntimeConfig();
+
 watch(
   () => user.value,
   (newValue) => {
@@ -35,6 +37,7 @@ watch(
       :providers="['google']"
       theme="dark"
       :magicLink="true"
+      :redirectTo="runtimeConfig.public.appUrl"
       :appearance="{
         theme: ThemeSupa,
         variables: {
