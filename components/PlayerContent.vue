@@ -6,7 +6,9 @@ import BsPlayFill from "@/components/ui/icons/BsPlayFill.vue";
 import HiSpeakerXMark from "@/components/ui/icons/HiSpeakerXMark.vue";
 import HiSpeakerWave from "@/components/ui/icons/HiSpeakerWave.vue";
 
-import { useSound } from "@vueuse/sound";
+import { useMainStore } from "@/stores/main";
+
+const { newUrl } = storeToRefs(useMainStore());
 
 import { type Song } from "@/types";
 
@@ -19,7 +21,6 @@ const { song, songUrl } = defineProps<PlayerContentProps>();
 
 const player = usePlayer();
 const volume = ref(1);
-const isPlaying = ref(false);
 
 const Icon = computed(() => {
   return isPlaying.value ? BsPauseFill : BsPlayFill;
@@ -60,16 +61,17 @@ const onPlayPrevious = () => {
   player.setId(previousSong);
 };
 
-const { play, pause, sound } = useSound(songUrl, {
-  volume: volume.value,
-  onplay: () => (isPlaying.value = true),
-  onend: () => {
-    isPlaying.value = false;
-    onPlayNext();
-  },
-  onpause: () => (isPlaying.value = false),
-  format: ["mp3"],
-});
+const { play, pause, sound, isPlaying, onVolumneChange, onSrcChange } =
+  await useSound(songUrl, {
+    volume: volume.value,
+    onplay: () => (isPlaying.value = true),
+    onend: () => {
+      isPlaying.value = false;
+      onPlayNext();
+    },
+    onpause: () => (isPlaying.value = false),
+    format: ["mp3"],
+  });
 
 const handlePlay = () => {
   if (!isPlaying.value) {
@@ -88,20 +90,30 @@ const toggleMute = () => {
 };
 
 watch(
-  () => sound.value,
+  () => newUrl.value,
   () => {
-    sound.value?.play();
+    onSrcChange(newUrl.value, volume.value);
+    play();
   }
 );
+
+watch(
+  () => sound.value,
+  () => {
+    play();
+  }
+);
+
+const onVolumeChange = (data: number) => {
+  volume.value = data;
+  onVolumneChange(volume.value);
+};
 </script>
 
 <template>
   <div class="grid grid-cols-2 md:grid-cols-3 h-full">
     <div class="flex w-full justify-start">
-      <div class="flex items-center gap-x-4">
-        <MediaItem :data="song" />
-        <LikeButton :songId="song.id" />
-      </div>
+      <slot />
     </div>
 
     <div class="flex md:hidden col-auto w-full justify-end items-center">
@@ -139,7 +151,7 @@ watch(
           @click="toggleMute"
           class="cursor-pointer h-[34px] w-[34px]"
         />
-        <Slider :value="volume" @onChange="(value) => (volume = value)" />
+        <Slider :value="volume" @onChange="onVolumeChange" />
       </div>
     </div>
   </div>
