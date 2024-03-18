@@ -4,7 +4,7 @@ const { className, disabled, type } = withDefaults(
   defineProps<{
     className?: string;
     disabled?: boolean;
-    type: "button" | "submit";
+    type?: "button" | "submit";
   }>(),
   {
     type: "button",

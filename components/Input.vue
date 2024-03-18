@@ -6,7 +6,7 @@ const emit = defineEmits(["change"]);
 
 interface InputProps {
   className?: string;
-  type: "text" | "email" | "file";
+  type?: "text" | "email" | "file";
   disabled?: boolean;
   inputProps?: Object;
 }
