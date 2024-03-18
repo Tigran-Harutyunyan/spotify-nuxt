@@ -15,8 +15,6 @@ const { user } = useUser();
 
 const runtimeConfig = useRuntimeConfig();
 
-debugger;
-
 watch(
   () => user.value,
   (newValue) => {
