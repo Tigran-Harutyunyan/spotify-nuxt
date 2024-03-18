@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import Sidebar from "@/components/Sidebar.vue";
+import Player from "@/components/Player.vue";
+
 import { type Song } from "@/types";
 import { useMainStore } from "@/stores/main";
 
@@ -37,8 +39,10 @@ watch(
 <template>
   <div class="flex h-full">
     <Sidebar :songs="songs" />
+
     <main class="h-full flex-1 overflow-y-auto py-2 md:pr-2">
       <slot />
     </main>
+    <Player />
   </div>
 </template>
