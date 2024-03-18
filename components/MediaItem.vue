@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { type Song } from "@/types";
+import SongItem from "./SongItem.vue";
 
 const emit = defineEmits<{
   (e: "onClick", id: string): void;

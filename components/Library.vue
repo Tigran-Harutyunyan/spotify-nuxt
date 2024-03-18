@@ -40,12 +40,7 @@ const onClick = () => {
       />
     </div>
     <div class="flex flex-col gap-y-2 mt-4 px-3">
-      <MediaItem
-        v-for="item in songs"
-        @click="(id: string) => onPlay(id)"
-        :key="item.id"
-        :data="item"
-      />
+      <MediaItem v-for="item in songs" :key="item.id" :data="item" />
     </div>
   </div>
 </template>
