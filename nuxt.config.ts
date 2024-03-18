@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@vee-validate/nuxt', '@nuxtjs/supabase', '@pinia/nuxt', "@nuxt/image", '@vueuse/nuxt', '@nuxtjs/google-fonts'],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-headlessui', '@vee-validate/nuxt', '@nuxtjs/supabase', '@pinia/nuxt', "@nuxt/image", '@vueuse/nuxt', '@nuxtjs/google-fonts'],
   shadcn: {
     /**
      * Prefix for all the imported component
