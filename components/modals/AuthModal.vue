@@ -15,6 +15,8 @@ const { user } = useUser();
 
 const runtimeConfig = useRuntimeConfig();
 
+debugger;
+
 watch(
   () => user.value,
   (newValue) => {
@@ -32,6 +34,7 @@ watch(
     :show="isModalOpen"
     @close="onClose()"
   >
+    {{ runtimeConfig.public.appUrl }}
     <Auth
       :supabaseClient="supabaseClient"
       :providers="['google']"
