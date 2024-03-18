@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export type ModalType = "auth" | "subscribe" | "upload";
+export type ModalType = "auth" | "upload";
 
 export const useModalsStore = defineStore("modals", () => {
     const type = ref<ModalType | null>(null);

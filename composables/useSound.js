@@ -25,8 +25,8 @@ function useSound(
     }
   }
 
-  const onVolumneChange = (volume, playbackRate) => {
-    if (sound.value && volume) {
+  const onVolumeChange = (volume, playbackRate) => {
+    if (sound.value) {
       sound.value.volume(unref(volume));
     }
     if (sound.value && playbackRate) {
@@ -107,7 +107,7 @@ function useSound(
     duration,
     pause,
     stop,
-    onVolumneChange,
+    onVolumeChange,
     onSrcChange,
   };
   return returnedValue;

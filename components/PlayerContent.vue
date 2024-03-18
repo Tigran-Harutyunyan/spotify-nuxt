@@ -9,15 +9,13 @@ import HiSpeakerWave from "@/components/ui/icons/HiSpeakerWave.vue";
 import { useMainStore } from "@/stores/main";
 
 const { newUrl } = storeToRefs(useMainStore());
-
-import { type Song } from "@/types";
+const { setVolume } = useMainStore();
 
 interface PlayerContentProps {
-  song: Song;
   songUrl: string;
 }
 
-const { song, songUrl } = defineProps<PlayerContentProps>();
+const { songUrl } = defineProps<PlayerContentProps>();
 
 const player = usePlayer();
 const volume = ref(1);
@@ -61,7 +59,7 @@ const onPlayPrevious = () => {
   player.setId(previousSong);
 };
 
-const { play, pause, sound, isPlaying, onVolumneChange, onSrcChange } =
+const { play, pause, sound, isPlaying, onVolumeChange, onSrcChange } =
   await useSound(songUrl, {
     volume: volume.value,
     onplay: () => (isPlaying.value = true),
@@ -87,6 +85,8 @@ const toggleMute = () => {
   } else {
     volume.value = 0;
   }
+
+  onSliderChange(volume.value);
 };
 
 watch(
@@ -104,9 +104,10 @@ watch(
   }
 );
 
-const onVolumeChange = (data: number) => {
+const onSliderChange = (data: number) => {
   volume.value = data;
-  onVolumneChange(volume.value);
+  setVolume(volume.value); // save to Pinia
+  onVolumeChange(data);
 };
 </script>
 
@@ -151,7 +152,7 @@ const onVolumeChange = (data: number) => {
           @click="toggleMute"
           class="cursor-pointer h-[34px] w-[34px]"
         />
-        <Slider :value="volume" @onChange="onVolumeChange" />
+        <Slider :value="volume" @onChange="onSliderChange" />
       </div>
     </div>
   </div>

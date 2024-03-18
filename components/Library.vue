@@ -12,17 +12,17 @@ interface LibraryProps {
 
 const { songs } = defineProps<LibraryProps>();
 
-const onPlay = useOnPlay(songs);
-
 const { user, subscription } = useUser();
 
 const onClick = () => {
   if (!user) {
     return onOpen("auth");
   }
-  // if (!subscription) {
+
+  // if (!subscription.value) {
   //   return onOpen("subscribe");
   // }
+
   return onOpen("upload");
 };
 </script>

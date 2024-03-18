@@ -49,7 +49,6 @@ const formSchema = toTypedSchema(
       .refine((file) => file?.name, "Image is required.")
       //.refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
       .refine((file) => {
-        console.log(file?.type);
         return ["image/jpg", "image/jpeg", "image/png", "image/webp"].includes(
           file?.type
         );

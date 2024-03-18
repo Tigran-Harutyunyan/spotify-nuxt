@@ -30,7 +30,7 @@ watch(
     v-if="currentSong && currentSongUrl && activeId"
     class="fixed bottom-0 bg-black w-full py-2 h-[80px] px-4"
   >
-    <PlayerContent :song="currentSong" :songUrl="currentSongUrl">
+    <PlayerContent :songUrl="currentSongUrl">
       <div class="flex items-center gap-x-4" :key="currentSong.id">
         <MediaItem :data="currentSong" />
         <LikeButton :songId="String(currentSong.id)" />
